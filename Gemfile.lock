@@ -17,6 +17,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     haml (3.0.25)
+    htmlentities (4.3.0)
     json (1.5.1)
     rack (1.2.2)
     tilt (1.2.2)
@@ -28,4 +29,5 @@ DEPENDENCIES
   bundler
   flickraw!
   haml
+  htmlentities
   sinatra!

@@ -4,7 +4,6 @@ Bundler.setup
 
 require 'sinatra'
 require 'flickraw'
-require 'cgi'
 
 configure do  
   # Set API key
@@ -28,14 +27,14 @@ get '/rss' do
   
   array = []
   
-  @@photosets.each do |set|
+  @@photosets[0..4].each do |set|
     
     # get the primary photo for thumbnail and photoset url
     primary = flickr.photos.getInfo(:photo_id => set.primary)
     
     # push sets to an array
     array << {  
-      :title => CGI.escapeHTML(set.title), 
+      :title => set.title,
       :description => set.description,
       :count => set.photos,
       :thumbnail_url => FlickRaw.url_m(primary),
@@ -46,5 +45,5 @@ get '/rss' do
   # return array as json object
   @array = array
   
-  haml(:rss, :format => :xhtml, :escape_html => true, :layout => false)
+  haml(:rss, :format => :xhtml, :layout => false)
 end
