@@ -1,11 +1,11 @@
 !!! XML
 %rss{:version => "2.0", "xmlns:atom" => "http://www.w3.org/2005/Atom"}
   %channel
-    %title USER's Flickr photosets
-    %link http://flickr.com/photos/USERNAME/sets/
-    %description Photosets by USER
+    %title== #{@user.username}'s Flickr photosets
+    %link== http://flickr.com/photos/#{@user.id}/sets/
+    %description== Photosets by #{@user.username}
     <atom:link href="http://flickrss.heroku.com/" rel="self" type="application/rss+xml" />
-    - @array.each do |set|
+    - @sets.each do |set|
       %item
         %title
           <![CDATA[

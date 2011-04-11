@@ -10,8 +10,9 @@ configure do
   FlickRaw.api_key="8e111f079960796424689d29fc4c5461"
 
   # get my user id
-  user_id = flickr.people.findByUsername(:username => 'Mark Turner').id
-  
+  @@user = flickr.people.findByUsername(:username => 'Mark Turner')
+  user_id = @@user.id
+    
   # get my photosets
   @@photosets = flickr.photosets.getList(:user_id => user_id).to_a
   
@@ -26,6 +27,7 @@ get '/rss' do
   headers['Cache-Control'] = 'public, max-age=21600' # Cache for six hours
   
   array = []
+  user = @@user
   
   @@photosets[0..4].each do |set|
     
@@ -45,7 +47,8 @@ get '/rss' do
   end
   
   # return array as json object
-  @array = array
+  @sets = array
+  @user = user
   
   haml(:rss, :format => :xhtml, :layout => false)
 end
