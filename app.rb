@@ -19,12 +19,16 @@ configure do
 end
 
 get '/' do
+  haml(:index, :format => :html5)
+end
+
+get '/rss' do
   content_type 'application/rss+xml', :charset => 'utf-8'
   headers['Cache-Control'] = 'public, max-age=21600' # Cache for six hours
   
   array = []
   
-  @@photosets[0..4].each do |set|
+  @@photosets.each do |set|
     
     # get the primary photo for thumbnail and photoset url
     primary = flickr.photos.getInfo(:photo_id => set.primary)
@@ -32,7 +36,7 @@ get '/' do
     # push sets to an array
     array << {  
       :title => CGI.escapeHTML(set.title), 
-      :description => CGI.escapeHTML(set.description),
+      :description => set.description,
       :count => set.photos,
       :thumbnail_url => FlickRaw.url_m(primary),
       :photoset_link_url => FlickRaw.url_photoset(primary) 
