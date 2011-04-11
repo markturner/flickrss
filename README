@@ -1,0 +1,9 @@
+----------------------------------
+Flickr Photoset RSS feed generator
+----------------------------------
+
+This is a lightweight ruby app, using sinatra, that returns an rss feed of a specified user's Flickr photosets.
+
+This is functionality that, puzzlingly, has never been provided by Flickr.
+
+Feel free to steal it and do with it what you wish.
