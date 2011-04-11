@@ -32,13 +32,15 @@ get '/rss' do
     # get the primary photo for thumbnail and photoset url
     primary = flickr.photos.getInfo(:photo_id => set.primary)
     
+    set.inspect
+    
     # push sets to an array
     array << {  
       :title => set.title,
       :description => set.description,
       :count => set.photos,
       :thumbnail_url => FlickRaw.url_m(primary),
-      :photoset_link_url => FlickRaw.url_photoset(primary) 
+      :photoset_link_url => FlickRaw.url_photosets(primary) + set.id
     }
   end
   
