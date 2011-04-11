@@ -19,12 +19,12 @@ configure do
 end
 
 get '/' do
-  content_type 'application/rss+xml'
+  content_type 'application/rss+xml', :charset => 'utf-8'
   headers['Cache-Control'] = 'public, max-age=21600' # Cache for six hours
   
   array = []
   
-  @@photosets.each do |set|
+  @@photosets[0..4].each do |set|
     
     # get the primary photo for thumbnail and photoset url
     primary = flickr.photos.getInfo(:photo_id => set.primary)
