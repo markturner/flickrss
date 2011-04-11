@@ -4,13 +4,14 @@
     %title USER's Flickr photosets
     %link http://flickr.com/photos/USERNAME/sets/
     %description Photosets by USER
-    <atom:link href="your site's RSS URL" rel="self" type="application/rss+xml" />
+    <atom:link href="http://flickrss.heroku.com/" rel="self" type="application/rss+xml" />
     - @array.each do |set|
       %item
         %title= set[:title]
         %link= set[:photoset_link_url]
         %description
-          = set[:description]
-          %br
-          %a{:href => set[:photoset_link_url]}View Photoset
-          == (#{set[:count]} photos)
+          %p
+            = set[:description]
+            %br
+            %a{:href => set[:photoset_link_url]}View Photoset
+            == (#{set[:count]} photos)
