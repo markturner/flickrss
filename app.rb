@@ -7,29 +7,37 @@ require 'flickraw'
 
 configure do  
   # Set API key
-  FlickRaw.api_key="8e111f079960796424689d29fc4c5461"
-
-  # get my user id
-  @@user = flickr.people.findByUsername(:username => 'Mark Turner')
-  user_id = @@user.id
-    
-  # get my photosets
-  @@photosets = flickr.photosets.getList(:user_id => user_id).to_a
-  
+  FlickRaw.api_key = "8e111f079960796424689d29fc4c5461"
 end
 
 get '/' do
   haml(:index, :format => :html5)
 end
 
-get '/rss' do
+get '/link' do
+  @link = "http://flickrss.heroku.com/rss/#{params[:user]}"
+  
+  haml(:link, :format => :html5)
+end
+
+get '/rss/*' do
   content_type 'application/rss+xml', :charset => 'utf-8'
   headers['Cache-Control'] = 'public, max-age=21600' # Cache for six hours
   
-  array = []
-  user = @@user
+  # get my user id
+  # user = flickr.people.findByUsername(:username => 'Mark Turner')
+  # user_id = user.id
+
+  # have this populated by input form
+  user_id = params["splat"].first
+  user = flickr.people.getInfo(:user_id => user_id)
+    
+  # get my photosets
+  photosets = flickr.photosets.getList(:user_id => user_id).to_a
   
-  @@photosets[0..4].each do |set|
+  array = []
+  
+  photosets[0..4].each do |set|
     
     # get the primary photo for thumbnail and photoset url
     primary = flickr.photos.getInfo(:photo_id => set.primary)
