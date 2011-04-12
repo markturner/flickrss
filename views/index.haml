@@ -1,3 +1,6 @@
+- if @error
+  %p#error Couldn't recognise your ID! Are you sure it's correct?
+
 %p This website will generate an RSS feed of your Flickr Photosets, something which, puzzlingly, has never been provided by Flickr themselves.
 %p Enter your flickr ID into the box below and hit 'generate' to produce your RSS feed:
 %form{:method => "get", :action => "/link"}

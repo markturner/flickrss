@@ -9,13 +9,21 @@ FlickRaw.api_key = "8e111f079960796424689d29fc4c5461"
 set :haml, :format => :html5
 
 get '/' do
+  if params[:user] == 'error'
+    @error = true
+  end
+  
   haml(:index)
 end
 
 get '/link' do
   @link = "http://flickrss.heroku.com/rss/#{params[:user]}"
-  @user = flickr.people.getInfo(:user_id => params[:user])
-  
+  begin
+    @user = flickr.people.getInfo(:user_id => params[:user])
+  rescue
+    redirect to '/?user=error'
+  end
+
   haml(:link)
 end
 
