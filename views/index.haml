@@ -1,14 +1,8 @@
-!!!
-%html
-  %head
-    %title FlickRSS
-    
-  %body
-    %p Enter your flickr ID into the box below and hit 'generate' to produce your RSS feed:
-    %p 
-      (
-      %a{:href => "http://idgettr.com/"} You can find out what your flickr ID is here
-      )
-    %form{:method => "get", :action => "/link"}
-      %input{:type => "text", :name => "user"}
-      %input{:type => "submit", :value => "Go"}
+%p This website will generate an RSS feed of your Flickr Photosets, something which, puzzlingly, has never been provided by Flickr themselves.
+%p Enter your flickr ID into the box below and hit 'generate' to produce your RSS feed:
+%form{:method => "get", :action => "/link"}
+  %input{:type => "text", :name => "user"}
+  %br
+  %input{:type => "submit", :value => "Generate", :id => "submit"}
+%p 
+  %a{:href => "http://idgettr.com/"} Don't know what your Flickr ID is? Find out here

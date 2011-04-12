@@ -1,9 +1,5 @@
-!!!
-%html
-  %head
-    %title FlickRSS
-    
-  %body
-    %p Your RSS feed can be found here:
-    %p.link= @link
-    %p What can I do with this...?
+%p== Hi, #{@user.username}!
+%p Your RSS feed is ready for use:
+%p#link
+  %a{:href => @link}= @link
+%p Copy and paste it where required. Enjoy!

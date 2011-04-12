@@ -5,29 +5,24 @@ Bundler.setup
 require 'sinatra'
 require 'flickraw'
 
-configure do  
-  # Set API key
-  FlickRaw.api_key = "8e111f079960796424689d29fc4c5461"
-end
+FlickRaw.api_key = "8e111f079960796424689d29fc4c5461"
+set :haml, :format => :html5
 
 get '/' do
-  haml(:index, :format => :html5)
+  haml(:index)
 end
 
 get '/link' do
   @link = "http://flickrss.heroku.com/rss/#{params[:user]}"
+  @user = flickr.people.getInfo(:user_id => params[:user])
   
-  haml(:link, :format => :html5)
+  haml(:link)
 end
 
 get '/rss/*' do
   content_type 'application/rss+xml', :charset => 'utf-8'
   headers['Cache-Control'] = 'public, max-age=21600' # Cache for six hours
   
-  # get my user id
-  # user = flickr.people.findByUsername(:username => 'Mark Turner')
-  # user_id = user.id
-
   # have this populated by input form
   user_id = params["splat"].first
   user = flickr.people.getInfo(:user_id => user_id)
@@ -37,7 +32,7 @@ get '/rss/*' do
   
   array = []
   
-  photosets[0..4].each do |set|
+  photosets[0..9].each do |set|
     
     # get the primary photo for thumbnail and photoset url
     primary = flickr.photos.getInfo(:photo_id => set.primary)
@@ -59,4 +54,8 @@ get '/rss/*' do
   @user = user
   
   haml(:rss, :format => :xhtml, :layout => false)
+end
+
+get '/style.css' do
+  sass :style
 end

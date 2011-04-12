@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %title FlickRSS
+    
+    %meta{:charset => 'utf-8'}
+    %link{:href => 'style.css', :media => 'screen, projection', :rel => "stylesheet", :type => "text/css"}
+    
+  %body
+    #container
+      %header
+        %hgroup
+          %h1
+            %a{:href => "http://flickrss.heroku.com"}flick<span class="pink">rss</span>
+    
+      %section
+        = yield
+      
+    %footer
+      %p
+        Website by
+        %a{:href => "http://markturner.info"}Mark Turner
+      %p#github
+        Source code on
+        %a{:href => "http://github.com/markturner/flickrss"}Github
