@@ -3,7 +3,7 @@
   %channel
     %title== #{@user.username}'s Flickr photosets
     %link== http://flickr.com/photos/#{@user.id}/sets/
-    %description== Photosets by #{@user.username}
+    %description== The 20 newest photosets by #{@user.username}
     <atom:link href="http://flickrss.heroku.com/" rel="self" type="application/rss+xml" />
     - @sets.each do |set|
       %item
