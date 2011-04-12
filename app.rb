@@ -40,7 +40,7 @@ get '/rss/*' do
   
   array = []
   
-  photosets.each do |set|
+  photosets[0..19].each do |set|
     
     # get the primary photo for thumbnail and photoset url
     primary = flickr.photos.getInfo(:photo_id => set.primary)
