@@ -21,7 +21,7 @@ get '/link' do
   begin
     @user = flickr.people.getInfo(:user_id => params[:user])
   rescue
-    redirect to '/?user=error'
+    redirect to '/?user=error'  # in case the ID is not recognised
   end
 
   haml(:link)
@@ -40,13 +40,11 @@ get '/rss/*' do
   
   array = []
   
-  photosets[0..19].reverse.each do |set|
+  photosets[0..19].each do |set|
     
     # get the primary photo for thumbnail and photoset url
     primary = flickr.photos.getInfo(:photo_id => set.primary)
-    
-    set.inspect
-    
+        
     # push sets to an array
     array << {  
       :title => set.title,
@@ -58,7 +56,7 @@ get '/rss/*' do
   end
   
   # return array as json object
-  @sets = array
+  @sets = array.reverse # so they appear in the right order chronologically
   @user = user
   
   haml(:rss, :format => :xhtml, :layout => false)
