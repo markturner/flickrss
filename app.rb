@@ -17,9 +17,9 @@ get '/' do
 end
 
 get '/link' do
-  @link = "http://flickrss.heroku.com/rss/#{params[:user]}"
   begin
-    @user = flickr.people.getInfo(:user_id => params[:user])
+    @user = flickr.people.getInfo(:url => params[:user])
+    @link = "http://flickrss.heroku.com/rss/#{@user.id}"
   rescue
     redirect to '/?user=error'  # in case the ID is not recognised
   end

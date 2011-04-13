@@ -1,12 +1,20 @@
 - if @error
-  %p#error Couldn't recognise your Flickr ID! Are you sure it's correct?
+  %p#error Couldn't recognise your Flickr URL! Are you sure it's correct? It should look like this: http://www.flickr.com/photos/your_name
 
 %p This website will generate an RSS feed of your Flickr Photosets, something which, puzzlingly, has never been provided by Flickr themselves.
-%p Enter your Flickr ID into the box below and hit 'generate' to produce your RSS feed:
+%h2 Instructions for use
+%p Enter your Flickr photostream URL into the box below and hit 'generate' to produce your RSS feed:
 %form{:method => "get", :action => "/link"}
   %input{:type => "text", :name => "user"}
   %br
   %input{:type => "submit", :value => "Generate", :id => "submit"}
-%p Note that your Flickr ID is not your username, it is a string of numbers and letters that looks like this: 98551956@N00
+%h2 How do I get my Flickr photostream URL?
+%p Simply go to your page on Flickr and copy the URL, or address, from your browser's address bar. Then paste it into the box above.
+%h2 Contact me
+%p If you have any complaints, suggestions, offers of work or marriage proposals, please get in touch.
 %p 
-  %a{:href => "http://idgettr.com/", :onClick => "recordOutboundLink(this, 'Outbound Links', 'idgetter.com');return false;"} Find out what your Flickr ID is here
+  Email me: 
+  %a{:href=>"mailto:markjturner@gmail.com"} markjturner@gmail.com
+  or tweet me:
+  %a{:href=>"http://twitter.com/markturner"} @markturner
+%p Thanks for visiting, I hope you found this site useful :)
